@@ -48,20 +48,18 @@ int get_new_UID(void)
      *** Be careful in order to avoid race conditions ***/
 /*** TO BE DONE 7.0 START ***/
 
-	if(pthread_mutex_lock(&cookie_mutex) == 0){
-		if(CurUID < MAX_COOKIES)
-			retval = (CurUID % MAX_COOKIES) + 1;
-		else
-			retval = 0;
-		
-		UserTracker[retval] = 0;
-		
-		if(pthread_mutex_unlock(&cookie_mutex) != 0)
-			fail_errno("pthread_mutex_unlock failed");
-	}
-	
-	else
+	if(pthread_mutex_lock(&cookie_mutex) != 0)
 		fail_errno("pthread_mutex_lock failed");
+	
+	if(CurUID < MAX_COOKIES)
+		retval = (CurUID % MAX_COOKIES) + 1;
+	else
+		retval = 0;
+		
+	UserTracker[retval] = 0;
+		
+	if(pthread_mutex_unlock(&cookie_mutex) != 0)
+		fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -79,16 +77,14 @@ int keep_track_of_UID(int myUID)
      *** Be careful in order to avoid race conditions ***/
 /*** TO BE DONE 7.0 START ***/
 
-	if(pthread_mutex_lock(&cookie_mutex) == 0){
-		UserTracker[myUID]++;
-		newcount = UserTracker[myUID];
-
-		if(pthread_mutex_unlock(&cookie_mutex) != 0)
-			fail_errno("pthread_mutex_unlock failed");
-	}
-	
-	else
+	if(pthread_mutex_lock(&cookie_mutex) != 0)
 		fail_errno("pthread_mutex_lock failed");
+		
+
+	newcount = UserTracker[myUID]++;
+
+	if(pthread_mutex_unlock(&cookie_mutex) != 0)
+		fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -158,8 +154,6 @@ void send_response(int client_fd, int response_code, int cookie,
 
 			file_size = stat_p->st_size;
 			file_modification_time = stat_p->st_mtime;
-			/*if(gmtime_r(&file_modification_time, &file_modification_tm) == NULL)
-				fail_errno("gmtime_r failed");*/
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -239,6 +233,8 @@ void send_response(int client_fd, int response_code, int cookie,
         if ( cookie >= 0 ) {
             /*** set permanent cookie in order to identify this client ***/
 /*** TO BE DONE 7.0 START ***/
+			if (gmtime_r(&file_modification_time, &file_modification_tm) == NULL)
+				fail_errno("gmtime_r failed");
 
 			sprintf(http_header + strlen(http_header), "\r\nSet Permanent Cookie: UserID=%d%s", cookie, COOKIE_EXPIRE);
 
@@ -260,11 +256,10 @@ void send_response(int client_fd, int response_code, int cookie,
 		     see gmtime and strftime ***/
 /*** TO BE DONE 7.0 START ***/
 
-		if(gmtime_r(&file_modification_time, &file_modification_tm) != NULL)
-			strftime(time_as_string, MAX_TIME_STR, "%a, %d %b %Y %T GMT", &file_modification_tm);
-
-		else		
+		if(gmtime_r(&file_modification_time, &file_modification_tm) == NULL)
 			fail_errno("gmtime_r failed");
+		
+		strftime(time_as_string, MAX_TIME_STR, "%a, %d %b %Y %T GMT", &file_modification_tm);
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -297,6 +292,7 @@ void send_response(int client_fd, int response_code, int cookie,
 /*** TO BE DONE 7.0 START ***/
 
 		int sent_bytes = sendfile(client_fd, fd, NULL, file_size);
+		
 		if (sent_bytes == -1 || sent_bytes < file_size)
 			fail_errno("sendfile failed");
 
@@ -402,15 +398,15 @@ void manage_http_requests(int client_fd
                                 /*** parse the cookie in order to get the UserID and count the number of requests coming from this client ***/
 /*** TO BE DONE 7.0 START ***/
 
-					option_val = strtok_r(NULL, ";", &strtokr_save);
-					
-					if(option_val != NULL){
-						char *cookie_name = strtok_r(option_val, "=", &strtokr_save);
-						char *cookie_value = strtok_r(NULL, "=", &strtokr_save);
+					option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 
-						if(cookie_name != NULL && cookie_value != NULL){
-							if(strcmp(cookie_name, "UserID") == 0)
-								UIDcookie = atoi(cookie_value);
+					if(option_val != NULL){
+						char *cookie = strstr(option_val, "UserID = ");
+
+						if(cookie != NULL){
+							cookie += strlen("UserID = ");
+							if (sscanf(cookie, "%d", &UIDcookie) != 1) 
+								UIDcookie = -1;							
 						}
 					}
 
@@ -429,8 +425,8 @@ void manage_http_requests(int client_fd
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 						
 						if (option_val != NULL){
-							strptime(option_val, "%a, %d %b %Y %T GMT", &since_tm);
-							http_method |= METHOD_CONDITIONAL;
+							if(strptime(option_val, "%a, %d %b %Y %T GMT", &since_tm) != NULL)
+								http_method |= 16;
 						}
 					}
 
@@ -489,6 +485,8 @@ void manage_http_requests(int client_fd
 				 ***/
 /*** TO BE DONE 7.0 START ***/
 
+				if(my_timegm(&since_tm) >= stat_p->st_mtime)
+					http_method = 8;
 
 /*** TO BE DONE 7.0 END ***/
 

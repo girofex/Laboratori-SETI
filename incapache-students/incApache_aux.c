@@ -77,6 +77,10 @@ time_t my_timegm(struct tm *tm)
         /*** Guess what is missing here ... ***/
 /*** TO BE DONE 7.0 START ***/
 
+				if (pthread_mutex_lock(&my_timegm_mutex) != 0)
+					fail_errno("pthread_mutex_lock failed");
+
+				tz = getenv("TZ");
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -92,6 +96,8 @@ time_t my_timegm(struct tm *tm)
         /*** Guess what is missing here ... ***/
 /*** TO BE DONE 7.0 START ***/
 
+				if (pthread_mutex_unlock(&my_timegm_mutex) != 0)
+					fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/
 
