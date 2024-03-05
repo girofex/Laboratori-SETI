@@ -78,7 +78,18 @@ pthread_mutex_t mime_mutex = PTHREAD_MUTEX_INITIALIZER;
 	 *** connection_no[i] ***/
 /*** TO BE DONE 7.1 START ***/
 
+		if(to_join[conn_no] != NULL){
+			for(i = MAX_CONNECTIONS; i < MAX_THREADS && to_join[conn_no] != &thread_ids[i]; ++i);
 		
+			if(pthread_join(thread_ids[i], NULL) == -1)
+				fail_errno("pthred_join failed");
+
+			if(no_response_threads[conn_no]-- == 0)
+				no_free_threads++;
+
+			connection_no[i] = FREE_SLOT;
+			to_join[conn_no] = NULL;
+	}
 
 /*** TO BE DONE 7.1 END ***/
 
@@ -98,6 +109,27 @@ pthread_mutex_t mime_mutex = PTHREAD_MUTEX_INITIALIZER;
 	 *** avoiding race conditions ***/
 /*** TO BE DONE 7.1 START ***/
 
+	if(to_join[thrd_no] != NULL){
+		for(i = 0; i < MAX_THREADS && to_join[thrd_no] != &thread_ids[i]; ++i);
+		
+		if(pthread_join(thread_ids[i], NULL) == -1)
+			fail_errno("pthred_join failed");
+		
+		if(i >= MAX_CONNECTIONS){
+			conn_no = connection_no[thrd_no];
+
+			if(pthread_mutex_lock(&threads_mutex) != 0)
+				fail_errno("pthread_mutex_lock failed");
+			
+			if(no_response_threads[conn_no]-- == 0)
+				no_free_threads++;
+
+			connection_no[i] = FREE_SLOT;
+			
+			if(pthread_mutex_unlock(&threads_mutex) != 0)
+				fail_errno("pthread_mutex_unlock failed");
+		}
+	}
 
 /*** TO BE DONE 7.1 END ***/
 
@@ -143,6 +175,7 @@ void *client_connection_thread(void *vp)
 	/*** properly initialize the thread queue to_join ***/
 /*** TO BE DONE 7.1 START ***/
 
+	to_join[connection_no] = NULL;
 
 /*** TO BE DONE 7.1 END ***/
 
@@ -183,6 +216,8 @@ char *get_mime_type(char *filename)
 	/*** What is missing here to avoid race conditions ? ***/
 /*** TO BE DONE 7.0 START ***/
 
+	if (pthread_mutex_lock(&mime_mutex) != 0)
+		fail_errno("pthread_mutex_lock failed");
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -195,6 +230,8 @@ char *get_mime_type(char *filename)
 	/*** What is missing here to avoid race conditions ? ***/
 /*** TO BE DONE 7.0 START ***/
 
+		if (pthread_mutex_unlock(&mime_mutex) != 0)
+			fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -225,6 +262,15 @@ void send_resp_thread(int out_socket, int response_code, int cookie,
 	/*** enqueue the current thread in the "to_join" data structure ***/
 /*** TO BE DONE 7.1 START ***/
 
+	if(to_join[connection_idx] != NULL){
+		to_join[new_thread_idx] = to_join[connection_idx];
+		to_join[connection_idx] = &thread_ids[new_thread_idx];
+	}
+	
+	else{
+		to_join[connection_idx] = &thread_ids[new_thread_idx];
+		to_join[new_thread_idx] = NULL;
+	}
 
 /*** TO BE DONE 7.1 END ***/
 

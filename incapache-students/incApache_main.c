@@ -116,8 +116,8 @@ void run_webserver(const char *const port_as_str, char *www_root, const int *con
 		/*** create PTHREAD number i, running client_connection_thread() ***/
 /*** TO BE DONE 7.0 START ***/
 
-		if (pthread_create(&thread_ids[i], NULL, client_connection_thread, &connection_no[i]) != 0)
-			fail_errno("pthread_create failed");
+		if(pthread_create(&thread_ids[i], NULL, client_connection_thread, &connection_no[i]) != 0)
+			fail_errno("pthread_create failed"); 
 
 /*** TO BE DONE 7.0 END ***/
 

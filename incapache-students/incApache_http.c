@@ -48,17 +48,17 @@ int get_new_UID(void)
      *** Be careful in order to avoid race conditions ***/
 /*** TO BE DONE 7.0 START ***/
 
-	if(pthread_mutex_lock(&cookie_mutex) != 0)
+	if(pthread_mutex_lock(&cookie_mutex) != 0)	//inizio utilizzo mutex
 		fail_errno("pthread_mutex_lock failed");
 	
-	if(CurUID < MAX_COOKIES)
-		retval = (CurUID % MAX_COOKIES) + 1;
+	if(CurUID < MAX_COOKIES)	//se ho un CurUID valido
+		retval = (CurUID % MAX_COOKIES) + 1;	//incremento
 	else
-		retval = 0;
+		retval = 0;	//altrimenti lo setto a 0
 		
-	UserTracker[retval] = 0;
+	UserTracker[retval] = 0;	//resetto UserTracker[retval] a 0
 		
-	if(pthread_mutex_unlock(&cookie_mutex) != 0)
+	if(pthread_mutex_unlock(&cookie_mutex) != 0)	//rilascio mutex
 		fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/
@@ -77,13 +77,12 @@ int keep_track_of_UID(int myUID)
      *** Be careful in order to avoid race conditions ***/
 /*** TO BE DONE 7.0 START ***/
 
-	if(pthread_mutex_lock(&cookie_mutex) != 0)
+	if(pthread_mutex_lock(&cookie_mutex) != 0)	//inizio utilizzo mutex
 		fail_errno("pthread_mutex_lock failed");
-		
 
 	newcount = UserTracker[myUID]++;
 
-	if(pthread_mutex_unlock(&cookie_mutex) != 0)
+	if(pthread_mutex_unlock(&cookie_mutex) != 0)	//rilascio mutex
 		fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/
@@ -116,7 +115,7 @@ void send_response(int client_fd, int response_code, int cookie,
 	/*** Compute date of servicing current HTTP Request using a variant of gmtime() ***/
 /*** TO BE DONE 7.0 START ***/
 	
-	if(gmtime_r(&now_t, &now_tm) == NULL)
+	if(gmtime_r(&now_t, &now_tm) == NULL)	//converte il tempo in una struttura tm e salva il risultato in now_tm
 		fail_errno("gmtime_r failed");
 
 /*** TO BE DONE 7.0 END ***/
@@ -152,6 +151,7 @@ void send_response(int client_fd, int response_code, int cookie,
 			/*** compute file_size and file_modification_time ***/
 /*** TO BE DONE 7.0 START ***/
 
+			//il controllo se stat_p è nullo lo fa già sopra
 			file_size = stat_p->st_size;
 			file_modification_time = stat_p->st_mtime;
 
@@ -233,10 +233,10 @@ void send_response(int client_fd, int response_code, int cookie,
         if ( cookie >= 0 ) {
             /*** set permanent cookie in order to identify this client ***/
 /*** TO BE DONE 7.0 START ***/
-			if (gmtime_r(&file_modification_time, &file_modification_tm) == NULL)
+			if(gmtime_r(&file_modification_time, &file_modification_tm) == NULL)	//converte il tempo in una struttura tm e salva il risultato in file_modification_tm
 				fail_errno("gmtime_r failed");
 
-			sprintf(http_header + strlen(http_header), "\r\nSet Permanent Cookie: UserID=%d%s", cookie, COOKIE_EXPIRE);
+			sprintf(http_header + strlen(http_header), "\r\nSet Permanent Cookie: UserID = %d%s", cookie, COOKIE_EXPIRE);
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -291,9 +291,9 @@ void send_response(int client_fd, int response_code, int cookie,
 		/*** send fd file on client_fd, then close fd; see syscall sendfile  ***/
 /*** TO BE DONE 7.0 START ***/
 
-		int sent_bytes = sendfile(client_fd, fd, NULL, file_size);
+		int sent = sendfile(client_fd, fd, NULL, file_size);
 		
-		if (sent_bytes == -1 || sent_bytes < file_size)
+		if (sent == -1 || sent < file_size)
 			fail_errno("sendfile failed");
 
 		if(close(fd) == -1)
@@ -405,7 +405,8 @@ void manage_http_requests(int client_fd
 
 						if(cookie != NULL){
 							cookie += strlen("UserID = ");
-							if (sscanf(cookie, "%d", &UIDcookie) != 1) 
+
+							if(sscanf(cookie, "%d", &UIDcookie) != 1) 
 								UIDcookie = -1;							
 						}
 					}
@@ -424,7 +425,7 @@ void manage_http_requests(int client_fd
 					if(strcmp(option_name, "If-Modified-Since") == 0){
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 						
-						if (option_val != NULL){
+						if(option_val != NULL){
 							if(strptime(option_val, "%a, %d %b %Y %T GMT", &since_tm) != NULL)
 								http_method |= 16;
 						}
