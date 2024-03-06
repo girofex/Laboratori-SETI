@@ -230,7 +230,7 @@ char *get_mime_type(char *filename)
 	/*** What is missing here to avoid race conditions ? ***/
 /*** TO BE DONE 7.0 START ***/
 
-		if (pthread_mutex_unlock(&mime_mutex) != 0)
+		if(pthread_mutex_unlock(&mime_mutex) != 0)
 			fail_errno("pthread_mutex_unlock failed");
 
 /*** TO BE DONE 7.0 END ***/

@@ -187,10 +187,12 @@ void send_response(int client_fd, int response_code, int cookie,
 				file_modification_time = stat_p->st_mtime;
 			}
 
-			stat_p = &stat_buffer;
+			else{
+				stat_p = &stat_buffer;
 
-			if(stat(HTML_404, stat_p))
-				fail_errno("stat(HTML_404, stat_p) failed");
+				if(stat(HTML_404, stat_p))
+					fail_errno("stat(HTML_404, stat_p) failed");
+			}
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -218,10 +220,12 @@ void send_response(int client_fd, int response_code, int cookie,
 				file_modification_time = stat_p->st_mtime;
 			}
 
-			stat_p = &stat_buffer;
+			else{
+				stat_p = &stat_buffer;
 
-			if(stat(HTML_501, stat_p))
-				fail_errno("stat(HTML_501, stat_p) failed");
+				if(stat(HTML_501, stat_p))
+					fail_errno("stat(HTML_501, stat_p) failed");
+			}
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -486,8 +490,10 @@ void manage_http_requests(int client_fd
 				 ***/
 /*** TO BE DONE 7.0 START ***/
 
-				if(my_timegm(&since_tm) >= stat_p->st_mtime)
+				if(my_timegm(&since_tm) > stat_p->st_mtime)
 					http_method = 8;
+				else
+					http_method = 2;
 
 /*** TO BE DONE 7.0 END ***/
 
