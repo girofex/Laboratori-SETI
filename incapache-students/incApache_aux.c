@@ -80,8 +80,6 @@ time_t my_timegm(struct tm *tm)
 				if(pthread_mutex_lock(&my_timegm_mutex) != 0)	//inizio l'utilizzo del mutex
 					fail_errno("pthread_mutex_lock failed");
 
-				tz = getenv("TZ");	//ritorna puntatore alla variabile d'ambiente per inizializzare tz
-
 /*** TO BE DONE 7.0 END ***/
 
                setenv("TZ", "", 1);

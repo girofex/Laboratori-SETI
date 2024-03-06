@@ -52,7 +52,7 @@ int get_new_UID(void)
 		fail_errno("pthread_mutex_lock failed");
 	
 	if(CurUID < MAX_COOKIES)	//se ho un CurUID valido
-		retval = (CurUID % MAX_COOKIES) + 1;	//incremento
+		retval = CurUID++ % MAX_COOKIES;	//incremento
 	else
 		retval = 0;	//altrimenti lo setto a 0
 		
@@ -182,17 +182,15 @@ void send_response(int client_fd, int response_code, int cookie,
 
 			mime_type = get_mime_type(HTML_404);
 
-			if(stat_p != NULL){
-				file_size = stat_p->st_size;
-				file_modification_time = stat_p->st_mtime;
-			}
+			if(stat_p == NULL){
+				if(fstat(fd, &stat_buffer) == -1)	//popolo il buffer con le informazioni del file
+					fail_errno("fstat failed");
 
-			else{
 				stat_p = &stat_buffer;
-
-				if(stat(HTML_404, stat_p))
-					fail_errno("stat(HTML_404, stat_p) failed");
 			}
+
+			file_size = stat_p->st_size;
+			file_modification_time = stat_p->st_mtime;
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -215,17 +213,15 @@ void send_response(int client_fd, int response_code, int cookie,
 
 			mime_type = get_mime_type(HTML_501);
 
-			if(stat_p != NULL){
-				file_size = stat_p->st_size;
-				file_modification_time = stat_p->st_mtime;
-			}
+			if(stat_p == NULL){
+				if(fstat(fd, &stat_buffer) == -1)	//popolo il buffer con le informazioni del file
+					fail_errno("fstat failed");
 
-			else{
 				stat_p = &stat_buffer;
-
-				if(stat(HTML_501, stat_p))
-					fail_errno("stat(HTML_501, stat_p) failed");
 			}
+
+			file_size = stat_p->st_size;
+			file_modification_time = stat_p->st_mtime;
 
 /*** TO BE DONE 7.0 END ***/
 
@@ -407,11 +403,9 @@ void manage_http_requests(int client_fd
 					if(option_val != NULL){
 						char *cookie = strstr(option_val, "UserID = ");
 
-						if(cookie != NULL){
-							cookie += strlen("UserID = ");
-
-							if(sscanf(cookie, "%d", &UIDcookie) != 1) 
-								UIDcookie = -1;							
+						if(cookie != NULL) {
+							if(sscanf(cookie + strlen("UserID = "), "%d", &UIDcookie) != 1)
+								UIDcookie = -1;
 						}
 					}
 
@@ -429,10 +423,8 @@ void manage_http_requests(int client_fd
 					if(strcmp(option_name, "If-Modified-Since") == 0){
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 						
-						if(option_val != NULL){
-							if(strptime(option_val, "%a, %d %b %Y %T GMT", &since_tm) != NULL)
-								http_method |= 16;
-						}
+						if(option_val != NULL && strptime(option_val, "%a, %d %b %Y %T GMT", &since_tm) != NULL)
+							http_method |= 16;
 					}
 
 /*** TO BE DONE 7.0 END ***/
@@ -492,6 +484,7 @@ void manage_http_requests(int client_fd
 
 				if(my_timegm(&since_tm) > stat_p->st_mtime)
 					http_method = 8;
+					
 				else
 					http_method = 2;
 
