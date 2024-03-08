@@ -5,3 +5,9 @@ TO DO:
 - relazione pingpong
 - relazione incapache con jmeter
 - togliere i commenti dai codici
+
+PER COMPILARE PING PONG:
+- make
+- terminale 1: ./pong_server 1491
+- terminale 2: seguire readme in scripts
+
