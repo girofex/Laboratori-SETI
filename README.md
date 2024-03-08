@@ -8,6 +8,10 @@ TO DO:
 
 PER COMPILARE PING PONG:
 - make
-- terminale 1: ./pong_server 1491
-- terminale 2: seguire readme in scripts
+- terminale 1:
+    - cd bin
+    - ./pong_server 1491
+- terminale 2:
+    - cd scripts
+    -seguire readme in scripts
 
