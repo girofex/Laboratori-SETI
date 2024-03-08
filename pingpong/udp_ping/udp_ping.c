@@ -40,7 +40,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 	if(sprintf(message, "%d\n", msg_no) < 0)
-		fail_errno("UDP Client: sprintf failed\n");
+		fail_errno("UDP Ping: sprintf failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -50,7 +50,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 		if(clock_gettime(CLOCK_TYPE, &send_time) < 0)
-			fail_errno("UDP Client: current time in send_time failed\n");
+			fail_errno("UDP Ping: clock_gettime failed storing in send_time\n");
 
 /*** TO BE DONE END ***/
 
@@ -60,7 +60,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 		sent_bytes = nonblocking_write_all(ping_socket, message, msg_size);
 		
 		if(sent_bytes == -1 || sent_bytes != msg_size)
-			fail_errno("UDP Client: message to server failed\n");	
+			fail_errno("UDP Ping: nonblocking_write_all failed\n");	
 
 /*** TO BE DONE END ***/
 
@@ -72,7 +72,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 		recv_errno = errno;
 		
 		if(recv_bytes < 0 && (recv_errno != EAGAIN && recv_errno != EWOULDBLOCK))
-			fail_errno("UDP Client: recv failed\n");
+			fail_errno("UDP Ping: recv failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -80,7 +80,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 		if(clock_gettime(CLOCK_TYPE, &recv_time) < 0)
-			fail_errno("UDP Client: current time in recv_time failed\n");
+			fail_errno("UDP Ping:  clock_gettime failed storing in recv_time\n");
 
 /*** TO BE DONE END ***/
 
@@ -131,7 +131,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 
 	gai_hints.ai_family = AF_INET;
 	gai_hints.ai_socktype = SOCK_DGRAM;
-	//gai_hints.ai_protocol = IPPROTO_UDP;
+	gai_hints.ai_protocol = IPPROTO_UDP;
 	gai_hints.ai_flags = 0;
 
 /*** TO BE DONE END ***/
@@ -143,7 +143,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 /*** TO BE DONE START ***/
 	
 	if(fcntl(ping_socket, F_SETFL, O_NONBLOCK) == -1)
-		fail_errno("UDP Client: fcntl() failed\n");
+		fail_errno("UDP Ping: fcntl failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -153,7 +153,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 	gai_rv = getaddrinfo(pong_addr, pong_port, &gai_hints, &pong_addrinfo);
 	
 	if(gai_rv != 0)
-		fail_errno("UDP Client: getaddrinfo failed\n");
+		fail_errno("UDP Ping: getaddrinfo failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -173,7 +173,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 /*** TO BE DONE START ***/
 
 	if(connect(ping_socket, pong_addrinfo->ai_addr, pong_addrinfo->ai_addrlen) != 0)
-		fail_errno("UDP Client: connection failed\n");
+		fail_errno("UDP Ping: connect failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
 	gai_rv = getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);
 	
 	if(gai_rv != 0)
-		fail_errno("UDP Client: getaddrinfo failed\n");
+		fail_errno("UDP Ping: getaddrinfo failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -238,10 +238,10 @@ int main(int argc, char *argv[])
 	ask_socket = socket(server_addrinfo->ai_family, server_addrinfo->ai_socktype, server_addrinfo->ai_protocol);
 	
 	if(ask_socket < 0)
-		fail_errno("UDP Client: creation socket failed\n");
+		fail_errno("UDP Ping: socket failed\n");
 		
 	if(connect(ask_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) != 0)
-		fail_errno("UDP Client: connection failed\n");
+		fail_errno("UDP Ping: connect failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -253,7 +253,7 @@ int main(int argc, char *argv[])
 /** TO BE DONE START ***/
 
 	if(write(ask_socket, request, strlen(request)) < 0)
-		fail_errno("UDP Client: writing failed\n");
+		fail_errno("UDP Ping: write failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -268,7 +268,7 @@ int main(int argc, char *argv[])
 /*** TO BE DONE START ***/
 
 	if(strncmp(answer, "OK\n", 2) != 0)
-		fail_errno("UDP Client: answer is not OK\n");
+		fail_errno("UDP Ping: answer is not OK\n");
 
 /*** TO BE DONE END ***/
 

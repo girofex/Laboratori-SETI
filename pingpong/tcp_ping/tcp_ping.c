@@ -40,7 +40,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 /*** TO BE DONE START ***/
 	
 	if(sprintf(message, "%d\n", msg_no) < 0)
-		fail_errno("TCP Client: sprintf failed\n");
+		fail_errno("TCP Ping: sprintf failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -48,7 +48,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 /*** TO BE DONE START ***/
 
 	if(clock_gettime(CLOCK_REALTIME, &send_time) < 0)
-		fail_errno("TCP Client: current time in send_time failed\n");
+		fail_errno("clock_gettime failed storing in send_time\n");
 
 /*** TO BE DONE END ***/
 
@@ -58,7 +58,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 	sent_bytes = blocking_write_all(tcp_socket, message, msg_size);
 	
 	if(sent_bytes == -1 || sent_bytes != msg_size)
-		fail_errno("TCP Client: blocking writing failed\n");
+		fail_errno("blocking_write_all failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -73,7 +73,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 /*** TO BE DONE START ***/
 
 	if(clock_gettime(CLOCK_REALTIME, &recv_time) < 0)
-		fail_errno("TCP Client: current time in recv_time failed\n");
+		fail_errno("clock_gettime failed storing in recv_time\n");
 
 /*** TO BE DONE END ***/
 
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 	gai_rv = getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);	//?
 	
 	if(gai_rv != 0)
-		fail_errno("TCP Client: getaddrinfo failed\n");
+		fail_errno("TCP Ping: getaddrinfo failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -141,10 +141,10 @@ int main(int argc, char **argv)
 	tcp_socket = socket(server_addrinfo->ai_family, server_addrinfo->ai_socktype, server_addrinfo->ai_protocol);
 	
 	if(tcp_socket < 0)
-		fail_errno("TCP Client: creation socket failed\n");
+		fail_errno("TCP Ping: socket failed\n");
 	
 	if(connect(tcp_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) != 0)
-		fail_errno("TCP Client: connect failed\n");
+		fail_errno("TCP Ping: connect failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -162,7 +162,7 @@ int main(int argc, char **argv)
 /*** TO BE DONE START ***/
 
 	if(write(tcp_socket, request, strlen(request)) != strlen(request))
-		fail_errno("TCP Client: write failed\n");
+		fail_errno("TCP Ping: write failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
 /*** TO BE DONE START ***/
 
 	if(strcmp(answer, "OK\n") != 0)
-		fail_errno("TCP Client: answer is not OK\n");
+		fail_errno("TCP Ping: answer is not OK\n");
 
 /*** TO BE DONE END ***/
 

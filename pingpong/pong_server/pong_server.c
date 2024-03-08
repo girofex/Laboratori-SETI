@@ -52,7 +52,7 @@ void tcp_pong(int message_no, size_t message_size, FILE *in_stream, int out_sock
 /*** TO BE DONE START ***/
 
 		if(clock_gettime(CLOCK_REALTIME, &time2) < 0)
-			fail_errno("TCP Server: current time in time2 failed\n");
+			fail_errno("TCP Server: clock_gettime failed getting time-stamp time2\n");
 
 /*** TO BE DONE END ***/
 
@@ -67,7 +67,7 @@ void tcp_pong(int message_no, size_t message_size, FILE *in_stream, int out_sock
 /*** TO BE DONE START ***/
 
 		if(clock_gettime(CLOCK_REALTIME, &time3) < 0)
-			fail_errno("TCP Server: current time in time3 failed\n");
+			fail_errno("TCP Server: clock_gettime failed getting time-stamp time3\n");
 
 /*** TO BE DONE END ***/
 
@@ -98,7 +98,7 @@ void udp_pong(int dgrams_no, int dgram_sz, int pong_socket)
 /*** TO BE DONE START ***/
 
 		if(clock_gettime(CLOCK_REALTIME, &time2) < 0)
-			fail_errno("TCP Server: current time in time2 failed\n");
+			fail_errno(" UDP Server: clock_gettime failed getting time-stamp time2\n");
 
 /*** TO BE DONE END ***/
 
@@ -135,7 +135,7 @@ void udp_pong(int dgrams_no, int dgram_sz, int pong_socket)
 /*** TO BE DONE START ***/
 
 		if(clock_gettime(CLOCK_REALTIME, &time3) < 0)
-			fail_errno("TCP Server: current time in time3 failed\n");
+			fail_errno("UDP Server: clock_gettime failed getting time-stamp time3\n");
 
 /*** TO BE DONE END ***/
 
@@ -180,12 +180,12 @@ int open_udp_socket(int *pong_port)
 		udp_socket = socket(pong_addrinfo->ai_family, pong_addrinfo->ai_socktype, pong_addrinfo->ai_protocol);
 		
 		if(udp_socket < 0)
-			fail_errno("UDP Server: creation udp_socket failed\n");
+			fail_errno("UDP Server: socket failed\n");
 		
 		bind_rv = bind(udp_socket, pong_addrinfo->ai_addr, pong_addrinfo->ai_addrlen);
 		
 		if(bind_rv < 0)
-			fail_errno("UDP Server: UDP bind failed\n");
+			fail_errno("UDP Server: bind failed\n");
 			
 		else if(bind_rv == 0){	//ritorna il socket per la nuova connessione
 			*pong_port = port_number;
@@ -322,14 +322,14 @@ void server_loop(int server_socket) {
 			
 			else{
 				close(request_socket);
-				fail_errno("Pong Server: connection failed\n");
+				fail_errno("accept failed\n");
 			}
 		}
 		
 		pid = fork();
 		
 		if(pid < 0)
-			fail_errno("Pong Server: fork failed\n");
+			fail_errno("fork failed\n");
 			
 		if(pid == 0)
 			serve_client(request_socket, &client_addr);
@@ -366,13 +366,13 @@ int main(int argc, char **argv)
 	server_socket = socket(server_addrinfo->ai_family, server_addrinfo->ai_socktype, server_addrinfo->ai_protocol);
 	
 	if(server_socket < 0)
-		fail_errno("Pong Server: TCP socket failed\n");
+		fail_errno("Pong Server: socket failed\n");
 	
 	if(bind(server_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) < 0)
-		fail_errno("Pong Server: bind TCP failed\n");
+		fail_errno("Pong Server: bind failed\n");
 	
 	if(listen(server_socket, LISTENBACKLOG) < 0)
-		fail_errno("Pong Server: listen TCP failed\n");
+		fail_errno("Pong Server: listen failed\n");
 
 /*** TO BE DONE END ***/
 
