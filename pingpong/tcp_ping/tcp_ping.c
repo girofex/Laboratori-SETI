@@ -38,7 +38,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 
     /*** write msg_no at the beginning of the message buffer ***/
 /*** TO BE DONE START ***/
-
+	
 	if(sprintf(message, "%d\n", msg_no) < 0)
 		fail_errno("TCP Client: sprintf failed\n");
 
@@ -56,6 +56,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int tcp_sock
 /*** TO BE DONE START ***/
 	
 	sent_bytes = blocking_write_all(tcp_socket, message, msg_size);
+	
 	if(sent_bytes == -1 || sent_bytes != msg_size)
 		fail_errno("TCP Client: blocking writing failed\n");
 
@@ -144,7 +145,6 @@ int main(int argc, char **argv)
 	
 	if(connect(tcp_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) != 0)
 		fail_errno("TCP Client: connect failed\n");
-		
 
 /*** TO BE DONE END ***/
 

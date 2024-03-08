@@ -1,3 +1,4 @@
+
 /*
  * Micro-bash v2.2
  *
@@ -88,7 +89,7 @@ void free_command(command_t * const c)
 {
 	assert(c==0 || c->n_args==0 || (c->n_args > 0 && c->args[c->n_args] == 0)); /* sanity-check: if c is not null, then it is either empty (in case of parsing error) or its args are properly NULL-terminated */
 	/*** TO BE DONE START ***/
-
+	
 	for(int i = 0; i < c->n_args; i++)
 		free(c->args[i]);
 	
@@ -96,7 +97,7 @@ void free_command(command_t * const c)
 	free(c->out_pathname);
 	free(c->in_pathname);
 	free(c);
-
+	
 	/*** TO BE DONE END ***/
 }
 
@@ -104,13 +105,13 @@ void free_line(line_t * const l)
 {
 	assert(l==0 || l->n_commands>=0); /* sanity-check */
 	/*** TO BE DONE START ***/
-
+	
 	for(int i = 0; i < l->n_commands; i++)
 		free(l->commands[i]);
 	
 	free(l->commands);
 	free(l);
-
+	
 	/*** TO BE DONE END ***/
 }
 
@@ -174,13 +175,13 @@ command_t *parse_cmd(char * const cmdstr)
 			if (*tmp=='$') {
 				/* Make tmp point to the value of the corresponding environment variable, if any, or the empty string otherwise */
 				/*** TO BE DONE START ***/
-
+				
 				if(getenv(my_strdup(tmp + 1)) == NULL)
 					tmp = "";
 				
 				else
 					tmp = getenv(my_strdup(tmp + 1));
-
+				
 				/*** TO BE DONE END ***/
 			}
 			result->args[result->n_args++] = my_strdup(tmp);
@@ -228,7 +229,7 @@ check_t check_redirections(const line_t * const l)
 	 * message and return CHECK_FAILED otherwise
 	 */
 	/*** TO BE DONE START ***/
-
+	
 	if(l->n_commands == 1)
 		return CHECK_OK;
 	
@@ -248,7 +249,7 @@ check_t check_redirections(const line_t * const l)
 			return CHECK_FAILED;	
 		}
 	}
-
+	
 	/*** TO BE DONE END ***/
 	return CHECK_OK;
 }
@@ -305,7 +306,7 @@ void wait_for_children()
 	 * Similarly, if a child is killed by a signal, then you should print a message specifying its PID, signal number and signal name.
 	 */
 	/*** TO BE DONE START ***/
-
+	
 	int exit_status = 0;
 	char exit_string[20];
 	
@@ -323,7 +324,7 @@ void wait_for_children()
 		snprintf(exit_string, 20, "Error signal: %d\n", WTERMSIG(exit_status));
 		fprintf(stderr, "%s\n", exit_string);
 	}
-
+	
 	/*** TO BE DONE END ***/
 }
 
@@ -333,7 +334,7 @@ void redirect(int from_fd, int to_fd)
 	 * That is, use dup/dup2/close to make to_fd equivalent to the original from_fd, and then close from_fd
 	 */
 	/*** TO BE DONE START ***/
-
+	
 	if(from_fd != NO_REDIR){
 		if(dup2(from_fd, to_fd) == -1)
 			fatal_errno("Error redirect: can't dup2\n");
@@ -341,7 +342,7 @@ void redirect(int from_fd, int to_fd)
 		if(close(from_fd) == -1)
 			fatal_errno("Error redirect: can't close\n");
 	}
-
+	
 	/*** TO BE DONE END ***/
 }
 
@@ -355,7 +356,7 @@ void run_child(const command_t * const c, int c_stdin, int c_stdout)
 	 * (printing error messages in case of failure, obviously)
 	 */
 	/*** TO BE DONE START ***/
-
+	
 	pid_t child = fork();
 	
 	if(child == -1)
@@ -368,7 +369,7 @@ void run_child(const command_t * const c, int c_stdin, int c_stdout)
 		if(execvp(c->args[0], c->args) == -1)
 			fprintf(stderr, "Error run_child: Command not found\n");
 	}
-
+	
 	/*** TO BE DONE END ***/
 }
 
@@ -378,10 +379,10 @@ void change_current_directory(char *newdir)
 	 * (printing an appropriate error message if the syscall fails)
 	 */
 	/*** TO BE DONE START ***/
-
+	
 	if(chdir(newdir) == -1)
 		fprintf(stderr, "Error change_current_directory: directory doesn't exist\n");
-
+	
 	/*** TO BE DONE END ***/
 }
 
@@ -409,12 +410,12 @@ void execute_line(const line_t * const l)
 			/* Open c->in_pathname and assign the file-descriptor to curr_stdin
 			 * (handling error cases) */
 			/*** TO BE DONE START ***/
-
+			
 			curr_stdin = open(c->in_pathname, O_RDONLY);
 			
 			if(curr_stdin == -1)
 				fatal_errno("Error execute_line: can't open stdin\n");
-
+			
 			/*** TO BE DONE END ***/
 		}
 		if (c->out_pathname) {
@@ -422,18 +423,18 @@ void execute_line(const line_t * const l)
 			/* Open c->out_pathname and assign the file-descriptor to curr_stdout
 			 * (handling error cases) */
 			/*** TO BE DONE START ***/
-
+			
 			curr_stdout = open(c->out_pathname, O_RDWR | O_CREAT, 0666);
 			
 			if(curr_stdout == -1)
 				fatal_errno("Error execute_line: can't open stdout\n");
-
+			
 			/*** TO BE DONE END ***/
 		} else if (a != (l->n_commands - 1)) { /* unless we're processing the last command, we need to connect the current command and the next one with a pipe */
 			int fds[2];
 			/* Create a pipe in fds, and set FD_CLOEXEC in both file-descriptor flags */
 			/*** TO BE DONE START ***/
-
+			
 			if(pipe(fds) == -1)
 				fatal_errno("Error execute_line: can't create pipe\n");
 			
@@ -442,7 +443,7 @@ void execute_line(const line_t * const l)
 				
 			if(fcntl(fds[1], F_SETFD, FD_CLOEXEC) == -1)
 				fatal_errno("Error execute_line: set FD_CLOEXEC stdout\n");
-
+			
 			/*** TO BE DONE END ***/
 			curr_stdout = fds[1];
 			next_stdin = fds[0];
@@ -477,12 +478,12 @@ int main()
 		 * The memory area must be allocated (directly or indirectly) via malloc.
 		 */
 		/*** TO BE DONE START ***/
-
+		
 		pwd = getcwd(NULL, 0);
 		
 		if(pwd == NULL)
 			fatal_errno("Error getcwd: failed\n");
-
+		
 		/*** TO BE DONE END ***/
 		pwd = my_realloc(pwd, strlen(pwd) + prompt_suffix_len + 1);
 		strcat(pwd, prompt_suffix);

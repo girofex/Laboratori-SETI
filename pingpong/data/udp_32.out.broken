@@ -1,0 +1,6 @@
+UDP Ping trying to connect to server localhost (127.0.0.1) on TCP port 1491
+ ... connected to Pong server: asking for 501 repetitions of 32 _bytes UDP messages
+ ... Pong server agreed to ping-pong using port 49152 :-)
+
+ ... received 0 bytes instead of 32 (lost count = 1); re-trying ...
+ ... re-trying ...

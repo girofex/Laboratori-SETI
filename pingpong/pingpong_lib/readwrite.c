@@ -73,9 +73,9 @@ ssize_t nonblocking_write_all(int fd, const void *ptr, size_t n)
 
 /*** TO BE DONE START ***/
 
-			if(errno == EAGAIN || errno == EWOULDBLOCK) //data la funzione bisogna controllare gli errno che bloccano la scrittura
+			if(errno == EAGAIN || errno == EWOULDBLOCK)
 				continue;
-			
+
 /*** TO BE DONE END ***/
 
 			if (n_left == n)

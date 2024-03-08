@@ -78,7 +78,7 @@ pthread_mutex_t mime_mutex = PTHREAD_MUTEX_INITIALIZER;
 	 *** connection_no[i] ***/
 /*** TO BE DONE 7.1 START ***/
 
-		if(to_join[conn_no] != NULL){
+	if(to_join[conn_no] != NULL){
 			for(i = MAX_CONNECTIONS; i < MAX_THREADS && to_join[conn_no] != &thread_ids[i]; ++i);
 		
 			if(pthread_join(thread_ids[i], NULL) == -1)

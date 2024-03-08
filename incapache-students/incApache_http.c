@@ -114,7 +114,7 @@ void send_response(int client_fd, int response_code, int cookie,
 
 	/*** Compute date of servicing current HTTP Request using a variant of gmtime() ***/
 /*** TO BE DONE 7.0 START ***/
-	
+
 	if(gmtime_r(&now_t, &now_tm) == NULL)	//converte il tempo in una struttura tm e salva il risultato in now_tm
 		fail_errno("gmtime_r failed");
 
@@ -233,7 +233,8 @@ void send_response(int client_fd, int response_code, int cookie,
         if ( cookie >= 0 ) {
             /*** set permanent cookie in order to identify this client ***/
 /*** TO BE DONE 7.0 START ***/
-			if(gmtime_r(&file_modification_time, &file_modification_tm) == NULL)	//converte il tempo in una struttura tm e salva il risultato in file_modification_tm
+
+		if(gmtime_r(&file_modification_time, &file_modification_tm) == NULL)	//converte il tempo in una struttura tm e salva il risultato in file_modification_tm
 				fail_errno("gmtime_r failed");
 
 			sprintf(http_header + strlen(http_header), "\r\nSet Permanent Cookie: UserID = %d%s", cookie, COOKIE_EXPIRE);
@@ -398,7 +399,7 @@ void manage_http_requests(int client_fd
                                 /*** parse the cookie in order to get the UserID and count the number of requests coming from this client ***/
 /*** TO BE DONE 7.0 START ***/
 
-					option_val = strtok_r(NULL, "\r\n", &strtokr_save);
+				option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 
 					if(option_val != NULL){
 						char *cookie = strstr(option_val, "UserID = ");
@@ -420,7 +421,7 @@ void manage_http_requests(int client_fd
                                  ***/
 /*** TO BE DONE 7.0 START ***/
 
-					if(strcmp(option_name, "If-Modified-Since") == 0){
+				if(strcmp(option_name, "If-Modified-Since") == 0){
 						option_val = strtok_r(NULL, "\r\n", &strtokr_save);
 						
 						if(option_val != NULL && strptime(option_val, "%a, %d %b %Y %T GMT", &since_tm) != NULL)

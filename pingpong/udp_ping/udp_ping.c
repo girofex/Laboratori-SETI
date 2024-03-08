@@ -58,8 +58,9 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 		sent_bytes = nonblocking_write_all(ping_socket, message, msg_size);
+		
 		if(sent_bytes == -1 || sent_bytes != msg_size)
-			fail_errno("UDP Client: message to server failed\n");			
+			fail_errno("UDP Client: message to server failed\n");	
 
 /*** TO BE DONE END ***/
 
@@ -69,6 +70,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 		memset(answer_buffer, 0, msg_size);
 		recv_bytes = recv(ping_socket, answer_buffer, msg_size, MSG_WAITALL);
 		recv_errno = errno;
+		
 		if(recv_bytes < 0 && (recv_errno != EAGAIN && recv_errno != EWOULDBLOCK))
 			fail_errno("UDP Client: recv failed\n");
 
@@ -77,8 +79,8 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 	/*** Store the current time in recv_time ***/
 /*** TO BE DONE START ***/
 
-	if(clock_gettime(CLOCK_TYPE, &recv_time) < 0)
-		fail_errno("UDP Client: current time in recv_time failed\n");
+		if(clock_gettime(CLOCK_TYPE, &recv_time) < 0)
+			fail_errno("UDP Client: current time in recv_time failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -147,8 +149,9 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 
     /*** call getaddrinfo() in order to get Pong Server address in binary form ***/
 /*** TO BE DONE START ***/
-	
+
 	gai_rv = getaddrinfo(pong_addr, pong_port, &gai_hints, &pong_addrinfo);
+	
 	if(gai_rv != 0)
 		fail_errno("UDP Client: getaddrinfo failed\n");
 
@@ -219,6 +222,7 @@ int main(int argc, char *argv[])
 /*** TO BE DONE START ***/
 
 	gai_rv = getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);
+	
 	if(gai_rv != 0)
 		fail_errno("UDP Client: getaddrinfo failed\n");
 
@@ -232,6 +236,7 @@ int main(int argc, char *argv[])
 /*** TO BE DONE START ***/
 
 	ask_socket = socket(server_addrinfo->ai_family, server_addrinfo->ai_socktype, server_addrinfo->ai_protocol);
+	
 	if(ask_socket < 0)
 		fail_errno("UDP Client: creation socket failed\n");
 		
@@ -261,7 +266,7 @@ int main(int argc, char *argv[])
 
     /*** Check if the answer is OK, and fail if it is not ***/
 /*** TO BE DONE START ***/
-	
+
 	if(strncmp(answer, "OK\n", 2) != 0)
 		fail_errno("UDP Client: answer is not OK\n");
 

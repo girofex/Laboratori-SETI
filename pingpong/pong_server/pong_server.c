@@ -173,16 +173,20 @@ int open_udp_socket(int *pong_port)
 /*** TO BE DONE START ***/
 
 		gai_rv = getaddrinfo(NULL, port_number_as_str, &gai_hints, &pong_addrinfo);
+		
 		if(gai_rv < 0)
 			fail_errno("UDP Server: getaddrinfo failed\n");
 		
 		udp_socket = socket(pong_addrinfo->ai_family, pong_addrinfo->ai_socktype, pong_addrinfo->ai_protocol);
+		
 		if(udp_socket < 0)
 			fail_errno("UDP Server: creation udp_socket failed\n");
 		
 		bind_rv = bind(udp_socket, pong_addrinfo->ai_addr, pong_addrinfo->ai_addrlen);
+		
 		if(bind_rv < 0)
 			fail_errno("UDP Server: UDP bind failed\n");
+			
 		else if(bind_rv == 0){	//ritorna il socket per la nuova connessione
 			*pong_port = port_number;
 			return udp_socket;
@@ -326,6 +330,7 @@ void server_loop(int server_socket) {
 		
 		if(pid < 0)
 			fail_errno("Pong Server: fork failed\n");
+			
 		if(pid == 0)
 			serve_client(request_socket, &client_addr);
 
@@ -354,10 +359,12 @@ int main(int argc, char **argv)
 /*** TO BE DONE START ***/
 
 	gai_rv = getaddrinfo(NULL, argv[1], &gai_hints, &server_addrinfo);
+	
 	if(gai_rv < 0)
 		fail_errno("Pong Server: getaddrinfo failed\n");
 	
 	server_socket = socket(server_addrinfo->ai_family, server_addrinfo->ai_socktype, server_addrinfo->ai_protocol);
+	
 	if(server_socket < 0)
 		fail_errno("Pong Server: TCP socket failed\n");
 	
