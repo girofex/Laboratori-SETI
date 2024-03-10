@@ -124,9 +124,9 @@ int main(int argc, char **argv)
     /*** call getaddrinfo() in order to get Pong Server address in binary form ***/
 /*** TO BE DONE START ***/
 
-	gai_rv = getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);	//?
+	gai_rv = getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);
 	
-	if(gai_rv != 0)
+	if(gai_rv < 0)
 		fail_errno("TCP Ping: getaddrinfo failed\n");
 
 /*** TO BE DONE END ***/
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 	if(tcp_socket < 0)
 		fail_errno("TCP Ping: socket failed\n");
 	
-	if(connect(tcp_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) != 0)
+	if(connect(tcp_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) < 0)
 		fail_errno("TCP Ping: connect failed\n");
 
 /*** TO BE DONE END ***/
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
     /*** Check if the answer is OK, and fail if it is not ***/
 /*** TO BE DONE START ***/
 
-	if(strcmp(answer, "OK\n") != 0)
+	if(strcmp(answer, "OK\n") < 0)
 		fail_errno("TCP Ping: answer is not OK\n");
 
 /*** TO BE DONE END ***/

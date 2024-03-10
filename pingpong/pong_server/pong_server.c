@@ -172,6 +172,7 @@ int open_udp_socket(int *pong_port)
                 /*** create DGRAM socket, call getaddrinfo() to set port number, and bind() ***/
 /*** TO BE DONE START ***/
 
+		//qui inizializzo var per salvare il valore di getaddrinfo e bind perchè dichiarate sopra
 		gai_rv = getaddrinfo(NULL, port_number_as_str, &gai_hints, &pong_addrinfo);
 		
 		if(gai_rv < 0)
@@ -187,7 +188,7 @@ int open_udp_socket(int *pong_port)
 		if(bind_rv < 0)
 			fail_errno("UDP Server: bind failed\n");
 			
-		else if(bind_rv == 0){	//ritorna il socket per la nuova connessione
+		else{	//ritorna il socket per la nuova connessione
 			*pong_port = port_number;
 			return udp_socket;
 		}
@@ -317,13 +318,11 @@ void server_loop(int server_socket) {
 /*** TO BE DONE START ***/
 
 		if(request_socket < 0){
-			if(errno == EINTR)
-				continue;	//forse senza
+			if(errno == EINTR) 
+				continue;
 			
-			else{
-				close(request_socket);
-				fail_errno("accept failed\n");
-			}
+			close(request_socket);
+			fail_errno("accept failed\n");
 		}
 		
 		pid = fork();
@@ -368,6 +367,7 @@ int main(int argc, char **argv)
 	if(server_socket < 0)
 		fail_errno("Pong Server: socket failed\n");
 	
+	//qui non inizializzo var per salvare il valore di bind e listen perchè non dichiarate sopra
 	if(bind(server_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) < 0)
 		fail_errno("Pong Server: bind failed\n");
 	

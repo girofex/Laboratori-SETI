@@ -71,7 +71,7 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 		recv_bytes = recv(ping_socket, answer_buffer, msg_size, MSG_WAITALL);
 		recv_errno = errno;
 		
-		if(recv_bytes < 0 && (recv_errno != EAGAIN && recv_errno != EWOULDBLOCK))
+		if(recv_bytes < 0 && (recv_errno != EAGAIN && recv_errno != EWOULDBLOCK) && roundtrip_time_ms < timeout)	//errno non relativo al timeout
 			fail_errno("UDP Ping: recv failed\n");
 
 /*** TO BE DONE END ***/
@@ -152,7 +152,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 
 	gai_rv = getaddrinfo(pong_addr, pong_port, &gai_hints, &pong_addrinfo);
 	
-	if(gai_rv != 0)
+	if(gai_rv < 0)
 		fail_errno("UDP Ping: getaddrinfo failed\n");
 
 /*** TO BE DONE END ***/
@@ -172,7 +172,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
     /*** connect the ping_socket UDP socket with the server ***/
 /*** TO BE DONE START ***/
 
-	if(connect(ping_socket, pong_addrinfo->ai_addr, pong_addrinfo->ai_addrlen) != 0)
+	if(connect(ping_socket, pong_addrinfo->ai_addr, pong_addrinfo->ai_addrlen) < 0)
 		fail_errno("UDP Ping: connect failed\n");
 
 /*** TO BE DONE END ***/
@@ -223,7 +223,7 @@ int main(int argc, char *argv[])
 
 	gai_rv = getaddrinfo(argv[1], argv[2], &gai_hints, &server_addrinfo);
 	
-	if(gai_rv != 0)
+	if(gai_rv < 0)
 		fail_errno("UDP Ping: getaddrinfo failed\n");
 
 /*** TO BE DONE END ***/
@@ -240,7 +240,7 @@ int main(int argc, char *argv[])
 	if(ask_socket < 0)
 		fail_errno("UDP Ping: socket failed\n");
 		
-	if(connect(ask_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) != 0)
+	if(connect(ask_socket, server_addrinfo->ai_addr, server_addrinfo->ai_addrlen) < 0)
 		fail_errno("UDP Ping: connect failed\n");
 
 /*** TO BE DONE END ***/
@@ -267,7 +267,7 @@ int main(int argc, char *argv[])
     /*** Check if the answer is OK, and fail if it is not ***/
 /*** TO BE DONE START ***/
 
-	if(strncmp(answer, "OK\n", 2) != 0)
+	if(strncmp(answer, "OK\n", 2) < 0)
 		fail_errno("UDP Ping: answer is not OK\n");
 
 /*** TO BE DONE END ***/

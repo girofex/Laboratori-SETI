@@ -1,5 +1,5 @@
 PINGPONGADDR=localhost
-PINGPONGPORT=1492
+PINGPONGPORT=1491
 TCP_EXE=../bin/tcp_ping
 UDP_EXE=../bin/udp_ping
 
