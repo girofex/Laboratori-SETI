@@ -68,11 +68,8 @@ double do_ping(size_t msg_size, int msg_no, char message[msg_size], int ping_soc
 /*** TO BE DONE START ***/
 
 		memset(answer_buffer, 0, msg_size);
-		recv_bytes = recv(ping_socket, answer_buffer, msg_size, MSG_WAITALL);
+		recv_bytes = recv(ping_socket, answer_buffer, msg_size, MSG_DONTWAIT);
 		recv_errno = errno;
-		
-		if(recv_bytes < 0 && (recv_errno != EAGAIN && recv_errno != EWOULDBLOCK) && roundtrip_time_ms < timeout)	//errno non relativo al timeout
-			fail_errno("UDP Ping: recv failed\n");
 
 /*** TO BE DONE END ***/
 
@@ -132,7 +129,7 @@ int prepare_udp_socket(char *pong_addr, char *pong_port)
 	gai_hints.ai_family = AF_INET;
 	gai_hints.ai_socktype = SOCK_DGRAM;
 	gai_hints.ai_protocol = IPPROTO_UDP;
-	gai_hints.ai_flags = 0;
+	gai_hints.ai_flags = AI_PASSIVE;
 
 /*** TO BE DONE END ***/
 
@@ -213,8 +210,8 @@ int main(int argc, char *argv[])
 
 	gai_hints.ai_family = AF_INET;
 	gai_hints.ai_socktype = SOCK_STREAM;
-	gai_hints.ai_flags = AI_PASSIVE;
 	gai_hints.ai_protocol = IPPROTO_TCP;
+	gai_hints.ai_flags = AI_PASSIVE;
 
 /*** TO BE DONE END ***/
 
@@ -267,7 +264,7 @@ int main(int argc, char *argv[])
     /*** Check if the answer is OK, and fail if it is not ***/
 /*** TO BE DONE START ***/
 
-	if(strncmp(answer, "OK\n", 2) < 0)
+	if(strncmp(answer, "OK", 2) < 0)
 		fail_errno("UDP Ping: answer is not OK\n");
 
 /*** TO BE DONE END ***/

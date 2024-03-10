@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/girofex/Documents/GitHub/Laboratori-SETI/microbash-students",
-      "program": "/home/girofex/Documents/GitHub/Laboratori-SETI/microbash-students/build/Debug/outDebug",
+      "externalConsole": true,
+      "cwd": "c:/Users/ftame/Documents/GitHub/Laboratori-SETI/microbash-students",
+      "program": "c:/Users/ftame/Documents/GitHub/Laboratori-SETI/microbash-students/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
