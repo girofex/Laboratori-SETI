@@ -41,7 +41,8 @@ for i in ${protocols[@]}; do
 	        set title "Location data"
 			set grid
 			lbf(x) = x / ( $Latency + x / $Bandwidth )
-			plot lbf(x) title "${i} median throughput" \
+			plot lbf(x) title "Latency-Bandwidth model with L=$Latency and B=$Bandwidth" with linespoints, \
+		 	    "../data/${i}_throughput.dat" using 1:3 title "$i median Throughput" \
 			    with linespoints
 			clear
 		eNDgNUPLOTcOMMAND
