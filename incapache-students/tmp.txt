@@ -1,0 +1,713 @@
+girofex@Ubuntu:~/Documents/GitHub/Laboratori-SETI/incapache-students$ bin/incapache www-root 80
+Server HTTP 1.0 listening on port 80
+with WWW root set to /home/girofex/Documents/GitHub/Laboratori-SETI/incapache-students/www-root
+
+
+
+
+PAGINA INIZIALE
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET / HTTP/1.1
+   ... method_str=GET, filename=/ (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Upgrade-Insecure-Requests: 1
+http_option_line: Sec-Fetch-Dest: document
+http_option_line: Sec-Fetch-Mode: navigate
+http_option_line: Sec-Fetch-Site: none
+http_option_line: Sec-Fetch-User: ?1
+
+-----------------------------------------------
+http_method=2, filename=index.html
+    ... sending file index.html
+  ... start send_response(response_code=200, filename=index.html)
+    ... send_response(200, index.html): opened file 8
+      ... get_mime_type(index.html): was not .css
+      ... get_mime_type(index.html): printed filename on mime_request_stream
+      ... get_mime_type(index.html): got answer text/html; charset=us-ascii
+    ... send_response(200, index.html): got mime type text/html; charset=us-ascii
+      ... send_response(200,index.html) : file opened, size=936, mime=text/html; charset=us-ascii
+      ... send_response(200, index.html) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:27:56 GMT
+Set Permanent Cookie: UserID = 0; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 936 
+Content-Type: text/html; charset=us-ascii
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, index.html): header sent
+  ... end send_response(200, index.html)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /css/stile.css HTTP/1.1
+   ... method_str=GET, filename=/css/stile.css (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/css,*/*;q=0.1
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/
+http_option_line: Sec-Fetch-Dest: style
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=css/stile.css
+    ... sending file css/stile.css
+  ... start send_response(response_code=200, filename=css/stile.css)
+    ... send_response(200, css/stile.css): opened file 8
+    ... send_response(200, css/stile.css): got mime type text/css;
+      ... send_response(200,css/stile.css) : file opened, size=89, mime=text/css;
+      ... send_response(200, css/stile.css) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:27:56 GMT
+Set Permanent Cookie: UserID = 1; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 89 
+Content-Type: text/css;
+Last-Modified: Tue, 28 Nov 2023 09:28:52 GMT
+
+
+      ... send_response(200, css/stile.css): header sent
+  ... end send_response(200, css/stile.css)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /images/calendar.png HTTP/1.1
+   ... method_str=GET, filename=/images/calendar.png (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=images/calendar.png
+    ... sending file images/calendar.png
+  ... start send_response(response_code=200, filename=images/calendar.png)
+    ... send_response(200, images/calendar.png): opened file 8
+      ... get_mime_type(images/calendar.png): was not .css
+      ... get_mime_type(images/calendar.png): printed filename on mime_request_stream
+      ... get_mime_type(images/calendar.png): got answer image/png; charset=binary
+    ... send_response(200, images/calendar.png): got mime type image/png; charset=binary
+      ... send_response(200,images/calendar.png) : file opened, size=27337, mime=image/png; charset=binary
+      ... send_response(200, images/calendar.png) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:27:56 GMT
+Set Permanent Cookie: UserID = 2; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 27337 
+Content-Type: image/png; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:52 GMT
+
+
+      ... send_response(200, images/calendar.png): header sent
+  ... end send_response(200, images/calendar.png)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /images/uncadunca.jpg HTTP/1.1
+   ... method_str=GET, filename=/images/uncadunca.jpg (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=images/uncadunca.jpg
+    ... sending file images/uncadunca.jpg
+  ... start send_response(response_code=200, filename=images/uncadunca.jpg)
+    ... send_response(200, images/uncadunca.jpg): opened file 8
+      ... get_mime_type(images/uncadunca.jpg): was not .css
+      ... get_mime_type(images/uncadunca.jpg): printed filename on mime_request_stream
+      ... get_mime_type(images/uncadunca.jpg): got answer image/jpeg; charset=binary
+    ... send_response(200, images/uncadunca.jpg): got mime type image/jpeg; charset=binary
+      ... send_response(200,images/uncadunca.jpg) : file opened, size=14231, mime=image/jpeg; charset=binary
+      ... send_response(200, images/uncadunca.jpg) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:27:56 GMT
+Set Permanent Cookie: UserID = 3; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 14231 
+Content-Type: image/jpeg; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:52 GMT
+
+
+      ... send_response(200, images/uncadunca.jpg): header sent
+  ... end send_response(200, images/uncadunca.jpg)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /favicon.ico HTTP/1.1
+   ... method_str=GET, filename=/favicon.ico (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=favicon.ico
+    ... sending file favicon.ico
+  ... start send_response(response_code=200, filename=favicon.ico)
+    ... send_response(200, favicon.ico): opened file 8
+      ... get_mime_type(favicon.ico): was not .css
+      ... get_mime_type(favicon.ico): printed filename on mime_request_stream
+      ... get_mime_type(favicon.ico): got answer image/vnd.microsoft.icon; charset=binary
+    ... send_response(200, favicon.ico): got mime type image/vnd.microsoft.icon; charset=binary
+      ... send_response(200,favicon.ico) : file opened, size=1406, mime=image/vnd.microsoft.icon; charset=binary
+      ... send_response(200, favicon.ico) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:27:56 GMT
+Set Permanent Cookie: UserID = 4; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 1406 
+Content-Type: image/vnd.microsoft.icon; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, favicon.ico): header sent
+  ... end send_response(200, favicon.ico)
+
+
+
+
+
+
+
+
+
+INVIO RICHIESTA
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+POST /index.html HTTP/1.1
+   ... method_str=POST, filename=/index.html (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=4
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Content-Type: application/x-www-form-urlencoded
+http_option_line: Content-Length: 32
+http_option_line: Origin: http://127.0.0.1:81
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/
+http_option_line: Upgrade-Insecure-Requests: 1
+http_option_line: Sec-Fetch-Dest: document
+http_option_line: Sec-Fetch-Mode: navigate
+http_option_line: Sec-Fetch-Site: same-origin
+http_option_line: Sec-Fetch-User: ?1
+method not implemented
+  ... start send_response(response_code=501, filename=POST)
+      ... get_mime_type(501_Method_Not_Implemented.html): was not .css
+      ... get_mime_type(501_Method_Not_Implemented.html): printed filename on mime_request_stream
+      ... get_mime_type(501_Method_Not_Implemented.html): got answer text/html; charset=us-ascii
+      ... send_response(501, POST) : header prepared
+Sending the following response:
+HTTP/1.0 501 Method Not Implemented
+Allow: HEAD,GET
+Date: Fri, 12 Apr 2024 09:28:30 GMT
+Set Permanent Cookie: UserID = 5; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 311 
+Content-Type: text/html; charset=us-ascii
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(501, POST): header sent
+  ... end send_response(501, POST)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /000_style.css HTTP/1.1
+   ... method_str=GET, filename=/000_style.css (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/css,*/*;q=0.1
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/index.html
+http_option_line: Sec-Fetch-Dest: style
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=000_style.css
+    ... sending file 000_style.css
+  ... start send_response(response_code=200, filename=000_style.css)
+    ... send_response(200, 000_style.css): opened file 8
+    ... send_response(200, 000_style.css): got mime type text/css;
+      ... send_response(200,000_style.css) : file opened, size=102, mime=text/css;
+      ... send_response(200, 000_style.css) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:28:31 GMT
+Set Permanent Cookie: UserID = 6; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 102 
+Content-Type: text/css;
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, 000_style.css): header sent
+  ... end send_response(200, 000_style.css)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /uncadunca.jpg HTTP/1.1
+   ... method_str=GET, filename=/uncadunca.jpg (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/index.html
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=uncadunca.jpg
+    ... sending file uncadunca.jpg
+  ... start send_response(response_code=200, filename=uncadunca.jpg)
+    ... send_response(200, uncadunca.jpg): opened file 8
+      ... get_mime_type(uncadunca.jpg): was not .css
+      ... get_mime_type(uncadunca.jpg): printed filename on mime_request_stream
+      ... get_mime_type(uncadunca.jpg): got answer image/jpeg; charset=binary
+    ... send_response(200, uncadunca.jpg): got mime type image/jpeg; charset=binary
+      ... send_response(200,uncadunca.jpg) : file opened, size=12385, mime=image/jpeg; charset=binary
+      ... send_response(200, uncadunca.jpg) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:28:31 GMT
+Set Permanent Cookie: UserID = 7; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 12385 
+Content-Type: image/jpeg; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, uncadunca.jpg): header sent
+  ... end send_response(200, uncadunca.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PAGINA SECONDARIA
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /epochtime.html HTTP/1.1
+   ... method_str=GET, filename=/epochtime.html (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/
+http_option_line: Upgrade-Insecure-Requests: 1
+http_option_line: Sec-Fetch-Dest: document
+http_option_line: Sec-Fetch-Mode: navigate
+http_option_line: Sec-Fetch-Site: same-origin
+http_option_line: Sec-Fetch-User: ?1
+
+-----------------------------------------------
+http_method=2, filename=epochtime.html
+    ... sending file epochtime.html
+  ... start send_response(response_code=200, filename=epochtime.html)
+    ... send_response(200, epochtime.html): opened file 8
+      ... get_mime_type(epochtime.html): was not .css
+      ... get_mime_type(epochtime.html): printed filename on mime_request_stream
+      ... get_mime_type(epochtime.html): got answer text/html; charset=us-ascii
+    ... send_response(200, epochtime.html): got mime type text/html; charset=us-ascii
+      ... send_response(200,epochtime.html) : file opened, size=1179, mime=text/html; charset=us-ascii
+      ... send_response(200, epochtime.html) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:29:58 GMT
+Set Permanent Cookie: UserID = 8; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 1179 
+Content-Type: text/html; charset=us-ascii
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, epochtime.html): header sent
+  ... end send_response(200, epochtime.html)
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /images/1234567890.png HTTP/1.1
+   ... method_str=GET, filename=/images/1234567890.png (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/epochtime.html
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=images/1234567890.png
+    ... sending file images/1234567890.png
+  ... start send_response(response_code=200, filename=images/1234567890.png)
+    ... send_response(200, images/1234567890.png): opened file 8
+      ... get_mime_type(images/1234567890.png): was not .css
+      ... get_mime_type(images/1234567890.png): printed filename on mime_request_stream
+      ... get_mime_type(images/1234567890.png): got answer image/png; charset=binary
+    ... send_response(200, images/1234567890.png): got mime type image/png; charset=binary
+      ... send_response(200,images/1234567890.png) : file opened, size=117469, mime=image/png; charset=binary
+      ... send_response(200, images/1234567890.png) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:29:58 GMT
+Set Permanent Cookie: UserID = 9; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 117469 
+Content-Type: image/png; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:52 GMT
+
+
+      ... send_response(200, images/1234567890.png): header sent
+  ... end send_response(200, images/1234567890.png)
+
+
+
+
+
+
+
+
+
+
+
+  TORNA A INIZIALE TRAMITE LINK
+  Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /index.html HTTP/1.1
+   ... method_str=GET, filename=/index.html (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/epochtime.html
+http_option_line: Upgrade-Insecure-Requests: 1
+http_option_line: Sec-Fetch-Dest: document
+http_option_line: Sec-Fetch-Mode: navigate
+http_option_line: Sec-Fetch-Site: same-origin
+http_option_line: Sec-Fetch-User: ?1
+
+-----------------------------------------------
+http_method=2, filename=index.html
+    ... sending file index.html
+  ... start send_response(response_code=200, filename=index.html)
+    ... send_response(200, index.html): opened file 8
+      ... get_mime_type(index.html): was not .css
+      ... get_mime_type(index.html): printed filename on mime_request_stream
+      ... get_mime_type(index.html): got answer text/html; charset=us-ascii
+    ... send_response(200, index.html): got mime type text/html; charset=us-ascii
+      ... send_response(200,index.html) : file opened, size=936, mime=text/html; charset=us-ascii
+      ... send_response(200, index.html) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:30:27 GMT
+Set Permanent Cookie: UserID = 10; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 936 
+Content-Type: text/html; charset=us-ascii
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, index.html): header sent
+  ... end send_response(200, index.html)
+
+
+
+
+
+
+
+
+
+
+SECONDA PAGINA
+Accepted connection from 127.0.0.1
+Accepted connection from 127.0.0.1
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /internet40years.html HTTP/1.1
+   ... method_str=GET, filename=/internet40years.html (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/index.html
+http_option_line: Upgrade-Insecure-Requests: 1
+http_option_line: Sec-Fetch-Dest: document
+http_option_line: Sec-Fetch-Mode: navigate
+http_option_line: Sec-Fetch-Site: same-origin
+http_option_line: Sec-Fetch-User: ?1
+
+-----------------------------------------------
+http_method=2, filename=internet40years.html
+    ... sending file internet40years.html
+  ... start send_response(response_code=200, filename=internet40years.html)
+    ... send_response(200, internet40years.html): opened file 9
+      ... get_mime_type(internet40years.html): was not .css
+      ... get_mime_type(internet40years.html): printed filename on mime_request_stream
+      ... get_mime_type(internet40years.html): got answer text/html; charset=us-ascii
+    ... send_response(200, internet40years.html): got mime type text/html; charset=us-ascii
+      ... send_response(200,internet40years.html) : file opened, size=1593, mime=text/html; charset=us-ascii
+      ... send_response(200, internet40years.html) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:30:58 GMT
+Set Permanent Cookie: UserID = 11; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 1593 
+Content-Type: text/html; charset=us-ascii
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, internet40years.html): header sent
+  ... end send_response(200, internet40years.html)
+
+-----------------------------------------------
+Received the following request:
+GET /images/kleinrock.jpg HTTP/1.1
+   ... method_str=GET, filename=/images/kleinrock.jpg (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/internet40years.html
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=images/kleinrock.jpg
+    ... sending file images/kleinrock.jpg
+  ... start send_response(response_code=200, filename=images/kleinrock.jpg)
+    ... send_response(200, images/kleinrock.jpg): opened file 3
+      ... get_mime_type(images/kleinrock.jpg): was not .css
+      ... get_mime_type(images/kleinrock.jpg): printed filename on mime_request_stream
+      ... get_mime_type(images/kleinrock.jpg): got answer image/jpeg; charset=binary
+    ... send_response(200, images/kleinrock.jpg): got mime type image/jpeg; charset=binary
+      ... send_response(200,images/kleinrock.jpg) : file opened, size=26766, mime=image/jpeg; charset=binary
+      ... send_response(200, images/kleinrock.jpg) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:30:58 GMT
+Set Permanent Cookie: UserID = 12; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 26766 
+Content-Type: image/jpeg; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:52 GMT
+
+
+      ... send_response(200, images/kleinrock.jpg): header sent
+  ... end send_response(200, images/kleinrock.jpg)
+
+
+
+
+
+
+
+
+TORNO INDIETRO CON PULSANTE CHROME
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /favicon.ico HTTP/1.1
+   ... method_str=GET, filename=/favicon.ico (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: image/avif,image/webp,*/*
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/internet40years.html
+http_option_line: Sec-Fetch-Dest: image
+http_option_line: Sec-Fetch-Mode: no-cors
+http_option_line: Sec-Fetch-Site: same-origin
+
+-----------------------------------------------
+http_method=2, filename=favicon.ico
+    ... sending file favicon.ico
+  ... start send_response(response_code=200, filename=favicon.ico)
+    ... send_response(200, favicon.ico): opened file 3
+      ... get_mime_type(favicon.ico): was not .css
+      ... get_mime_type(favicon.ico): printed filename on mime_request_stream
+      ... get_mime_type(favicon.ico): got answer image/vnd.microsoft.icon; charset=binary
+    ... send_response(200, favicon.ico): got mime type image/vnd.microsoft.icon; charset=binary
+      ... send_response(200,favicon.ico) : file opened, size=1406, mime=image/vnd.microsoft.icon; charset=binary
+      ... send_response(200, favicon.ico) : header prepared
+Sending the following response:
+HTTP/1.0 200 OK
+Date: Fri, 12 Apr 2024 09:31:29 GMT
+Set Permanent Cookie: UserID = 13; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 1406 
+Content-Type: image/vnd.microsoft.icon; charset=binary
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(200, favicon.ico): header sent
+  ... end send_response(200, favicon.ico)
+
+
+
+
+
+
+
+
+
+READ MORE
+Accepted connection from 127.0.0.1
+
+-----------------------------------------------
+Received the following request:
+GET /nonexistent.html HTTP/1.1
+   ... method_str=GET, filename=/nonexistent.html (0=/), protocol=HTTP/1.1 (len=8)
+     ... http_method=2
+http_option_line: Host: 127.0.0.1:81
+http_option_line: User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0
+http_option_line: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+http_option_line: Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3
+http_option_line: Accept-Encoding: gzip, deflate, br
+http_option_line: Connection: keep-alive
+http_option_line: Referer: http://127.0.0.1:81/internet40years.html
+http_option_line: Upgrade-Insecure-Requests: 1
+http_option_line: Sec-Fetch-Dest: document
+http_option_line: Sec-Fetch-Mode: navigate
+http_option_line: Sec-Fetch-Site: same-origin
+http_option_line: Sec-Fetch-User: ?1
+
+-----------------------------------------------
+http_method=2, filename=nonexistent.html
+    ... file nonexistent.html not found!
+  ... start send_response(response_code=404, filename=nonexistent.html)
+      ... get_mime_type(404_Not_Found.html): was not .css
+      ... get_mime_type(404_Not_Found.html): printed filename on mime_request_stream
+      ... get_mime_type(404_Not_Found.html): got answer text/html; charset=us-ascii
+      ... send_response(404, nonexistent.html) : header prepared
+Sending the following response:
+HTTP/1.0 404 Not Found
+Date: Fri, 12 Apr 2024 09:31:51 GMT
+Set Permanent Cookie: UserID = 14; Expires=Wed, 31 Dec 2023 23:59:59 GMT
+Server: incApache 7.0 for SETI.
+Connection: close
+Content-Length: 250 
+Content-Type: text/html; charset=us-ascii
+Last-Modified: Tue, 28 Nov 2023 09:28:39 GMT
+
+
+      ... send_response(404, nonexistent.html): header sent
+  ... end send_response(404, nonexistent.html)
